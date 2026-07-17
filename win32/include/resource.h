@@ -1,11 +1,16 @@
+#ifndef RESOURCE_h
+#define RESOURCE_h
+
 #define IDI_APPICON                     101
 #define IDR_MAINMENU                    102
 #define IDD_ABOUTDIALOG                 103
 #define IDR_ACCELERATOR                 104
 #define IDD_INTERPRETATIONDIALOG        105
+#define IDD_REFERENCEDIALOG             106
 #define ID_HELP_ABOUT                   40001
 #define ID_FILE_EXIT                    40002
 #define ID_HELP_INTERPRETATION          40003
+#define ID_HELP_REFERENCE               40004
 
 #define IDC_STATIC -1
 
@@ -21,4 +26,6 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #endif
 
 
-HWND hWndResult, hWndComboPSA, hWndComboCS, hWndComboPGG, hWndComboSGG, hWndComboPPC;
+extern HWND hWndResult, hWndLni, hWndComboBGG, hWndComboCS, hWndComboMRI, hWndComboPSA, hWndComboPPC;
+
+#endif  // RESOURCE_h

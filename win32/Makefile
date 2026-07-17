@@ -6,10 +6,10 @@ INCLUDE_DIRS = -I./include
 
 WARNS = -Wall
 
-CC = i586-mingw32msvc-gcc
+CC = i686-w64-mingw32-gcc-win32
 CFLAGS = -O3 -std=c99 -D UNICODE -D _UNICODE -D _WIN32_IE=0x0500 -D WINVER=0x500 ${WARNS}
 LDFLAGS = -s -lcomctl32 -Wl,--subsystem,windows
-RC = i586-mingw32msvc-windres
+RC = i686-w64-mingw32-windres
 
 all : Briganti.exe
 

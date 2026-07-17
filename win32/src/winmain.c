@@ -5,12 +5,14 @@
 #include "resource.h"
 #include "callbacks.h"
 
-/* Briganti Nomogram EPLD 2012
- * PSA = Prostate specific antigen
- * CS  = Clinical stage
- * PGG = Primary Gleason Grade
- * SGG = Secondary Gleason Grade
- * PPC = Percentage of positive cores
+HWND hWndResult, hWndLni, hWndComboBGG, hWndComboCS, hWndComboMRI, hWndComboPSA, hWndComboPPC, hWndIcon;
+
+/* Briganti Nomogram 3 - EUROPEAN UROLOGY ONCOLOGY 6 (2023) 543–552
+ * BGG = Biopsy grade group 5
+ * CS  = Clinical stage at mpMRI
+ * MRI = Maximum diameter of the index lesion at mpMRI (mm)
+ * PSA = Preoperative PSA (ng/ml)
+ * PPC = Percentage of positive cores at systematic biopsy
  */ 
 
 // Our application entry point.
@@ -20,12 +22,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   WNDCLASSEX wc;
   LPCTSTR MainWndClass = TEXT("Briganti Nomogram");
   HWND hWnd; 
-  HWND hWndLabelResult, hWndLabelPSA, hWndLabelCS, hWndLabelPGG, hWndLabelSGG, hWndLabelPPC;
+  HWND hWndLabelResult, hWndLabelLni, hWndLabelBGG, hWndLabelCS, hWndLabelMRI, hWndLabelPSA, hWndLabelPPC;
   HACCEL hAccelerators;
   HMENU hSysMenu;
   MSG msg;
   int k;
-  TCHAR A[4];
+  TCHAR A[25];
 
   // Initialise common controls.
   icc.dwSize = sizeof(icc);
@@ -65,25 +67,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     return 0;
   }
 
-  // PSA
+  // BGG
   // ================================================================
-  hWndLabelPSA = CreateWindow(TEXT("STATIC"), TEXT("Prostate specific antigen:"),
+  hWndLabelBGG = CreateWindow(TEXT("STATIC"), TEXT("Biopsy grade group 5:"),
          WS_VISIBLE | WS_CHILD | SS_LEFT,
          40, 20, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   
-  hWndComboPSA = CreateWindow(WC_COMBOBOX, TEXT(""), 
-         CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
+  hWndComboBGG = CreateWindow(WC_COMBOBOX, TEXT(""),
+         CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 40, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 1; k <= 18; ++k)
+  for (k = 0; k <= 1; ++k)
   {
       // Add string to combobox.
-      swprintf(A,3,L"%d",2*k);
-      SendMessage(hWndComboPSA,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
+      swprintf(A,3,L"%d\0",k);
+      SendMessage(hWndComboBGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
   }
       
   // Send the CB_SETCURSEL message to display an initial item in the selection field  
-  SendMessage(hWndComboPSA, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
+  SendMessage(hWndComboBGG, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 
   // CS
   // ================================================================
@@ -92,53 +94,53 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          40, 90, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   
   hWndComboCS = CreateWindow(WC_COMBOBOX, TEXT(""), 
-         CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
-         40, 110, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+         CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
+         40, 110, 200, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 1; k <= 3; ++k)
-  {
-      swprintf(A,3,L"T%d",k);
-      SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
-  }
+  swprintf(A,15,L"Organ Confined\0");
+  SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
+  swprintf(A,24,L"Extracapsular Extension\0");
+  SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
+  swprintf(A,25,L"Seminal Vesicle Invasion\0");
+  SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
 
   SendMessage(hWndComboCS, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 
-  
-  // PGG
+  // MRI
   // ================================================================
-  hWndLabelPGG = CreateWindow(TEXT("STATIC"), TEXT("Primary Gleason grade:"),
+  hWndLabelMRI = CreateWindow(TEXT("STATIC"), TEXT("Maximum diameter of the index lesion at mpMRI (mm):"),
          WS_VISIBLE | WS_CHILD | SS_LEFT,
-         40, 160, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+         40, 160, 400, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   
-  hWndComboPGG = CreateWindow(WC_COMBOBOX, TEXT(""), 
-         CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
+  hWndComboMRI = CreateWindow(WC_COMBOBOX, TEXT(""), 
+         CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 180, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 3; k <= 4; ++k)
+  for (k = 0; k <= 45; ++k)
   {
-      swprintf(A, 4, (k==3)? L"<=%d" : L">=%d", k);
-      SendMessage(hWndComboPGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
+	  swprintf(A, 3, L"%d\0", k);
+      SendMessage(hWndComboMRI,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
-  SendMessage(hWndComboPGG, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
+  SendMessage(hWndComboMRI, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 
-  // SGG
+  // PSA
   // ================================================================
-  hWndLabelSGG = CreateWindow(TEXT("STATIC"), TEXT("Secondary Gleason grade:"),
+  hWndLabelPSA = CreateWindow(TEXT("STATIC"), TEXT("Preoperative PSA (ng/ml):"),
          WS_VISIBLE | WS_CHILD | SS_LEFT,
          40, 230, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   
-  hWndComboSGG = CreateWindow(WC_COMBOBOX, TEXT(""), 
-         CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
+  hWndComboPSA = CreateWindow(WC_COMBOBOX, TEXT(""),
+         CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 250, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 3; k <= 4; ++k)
+  for (k = 0; k <= 100; ++k)
   {
-      swprintf(A, 4, (k==3)? L"<=%d" : L">=%d", k);
-      SendMessage(hWndComboSGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
+	  swprintf(A, 4, L"%d\0", k);
+      SendMessage(hWndComboPSA,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
   }
 
-  SendMessage(hWndComboSGG, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
+  SendMessage(hWndComboPSA, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
 
   // PPC
   // ================================================================
@@ -147,29 +149,46 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          40, 300, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   
   hWndComboPPC = CreateWindow(WC_COMBOBOX, TEXT(""), 
-         CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
+         CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 320, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 1; k <= 10; ++k)
+  for (k = 0; k <= 100; ++k)
   {
-      swprintf(A, 3, L"%d", 10*k);
+      swprintf(A, 4, L"%d\0", k);
       SendMessage(hWndComboPPC,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
   SendMessage(hWndComboPPC, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
   
+  // Image
+  // ================================================================
+  hWndIcon = CreateWindow(TEXT("STATIC"), NULL,
+           WS_VISIBLE | WS_CHILD | SS_BITMAP,
+           500, 20, 400, 400, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+  HBITMAP hImage = LoadImage(NULL, MAKEINTRESOURCE(IDI_APPICON), IMAGE_BITMAP, 0, 0, LR_DEFAULTCOLOR);
+  SendMessage(hWndIcon, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hImage);
 
   // Total points
   // ================================================================  
   hWndLabelResult = CreateWindow(TEXT("STATIC"), TEXT("Total points:"),
          WS_VISIBLE | WS_CHILD | SS_LEFT,
-         500, 160, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+         500, 230, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
   hWndResult = CreateWindow(WC_EDIT, TEXT(""), 
-         WS_CHILD | WS_TABSTOP | WS_VISIBLE,
-         500, 180, 75, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+         WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER,
+         500, 250, 75, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   UpdateResult(hWnd);
 
+  // Risk of LNI
+  // ================================================================
+  hWndLabelLni = CreateWindow(TEXT("STATIC"), TEXT("Risk of LNI:"),
+	     WS_VISIBLE | WS_CHILD | SS_LEFT,
+	     500, 300, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+
+  hWndLni = CreateWindow(WC_EDIT, TEXT(""),
+	     WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER,
+	     500, 320, 75, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
+  UpdateResult(hWnd);
 
   // Load accelerators.
   hAccelerators = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDR_ACCELERATOR));
@@ -177,7 +196,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   // Add "about" to the system menu.
   hSysMenu = GetSystemMenu(hWnd, FALSE);
   InsertMenu(hSysMenu, 5, MF_BYPOSITION, ID_HELP_INTERPRETATION, TEXT("Interpretation"));
-  InsertMenu(hSysMenu, 6, MF_BYPOSITION, ID_HELP_ABOUT, TEXT("About"));
+  InsertMenu(hSysMenu, 6, MF_BYPOSITION, ID_HELP_REFERENCE, TEXT("Reference"));
+  InsertMenu(hSysMenu, 7, MF_BYPOSITION, ID_HELP_ABOUT, TEXT("About"));
 
   // Show window and force a paint.
   ShowWindow(hWnd, nCmdShow);

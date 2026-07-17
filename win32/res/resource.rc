@@ -14,6 +14,7 @@ BEGIN
     POPUP "&Help"
     BEGIN
         MENUITEM "&Interpretation",             ID_HELP_INTERPRETATION
+        MENUITEM "&Reference",                  ID_HELP_REFERENCE
         MENUITEM "&About",                      ID_HELP_ABOUT
     END
 END
@@ -23,8 +24,8 @@ CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Application.manifest"
 
 // Executable version information.
 1 VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,0,0,3
+ PRODUCTVERSION 1,0,0,3
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -41,12 +42,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "No iDevice Software"
             VALUE "FileDescription", "Win32 Application"
-            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "FileVersion", "1, 0, 0, 3"
             VALUE "InternalName", "Briganti"
-            VALUE "LegalCopyright", "©2012 No iDevice Software"
+            VALUE "LegalCopyright", "Â©2026 No iDevice Software"
             VALUE "OriginalFilename", "Briganti.exe"
             VALUE "ProductName", "Briganti Nomogram"
-            VALUE "ProductVersion", "1, 0, 0, 1"
+            VALUE "ProductVersion", "1, 0, 0, 3"
         END
     END
     BLOCK "VarFileInfo"
@@ -62,30 +63,42 @@ CAPTION "About"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     ICON            IDI_APPICON,IDC_STATIC,7,7,20,20
-    LTEXT           "Briganti Nomogram.",IDC_STATIC,34,7,86,8
-    LTEXT           "License: Free.",IDC_STATIC,34,17,86,8
-    LTEXT           "©2012 No iDevice Software",IDC_STATIC,34,27,100,8
+    LTEXT           "Briganti Nomogram 1.0.0.3",IDC_STATIC,34,7,100,8
+    LTEXT           "License: Free",IDC_STATIC,34,17,86,8
+    LTEXT           "(c)2026 No iDevice Software",IDC_STATIC,34,27,100,8
     DEFPUSHBUTTON   "OK",IDOK,90,46,50,14,WS_GROUP
 END
 
 //Interpretation dialog
-IDD_INTERPRETATIONDIALOG DIALOGEX 0, 0, 480, 87
+IDD_INTERPRETATIONDIALOG DIALOGEX 0, 0, 520, 100
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Interpretation"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "In the original paper from 2006",IDC_STATIC,34,7,400,8
-    LTEXT           """A Nomogram for Staging of Exclusive Nonobturator Lymph Node Metastases in Men with Localized Prostate Cancer""",IDC_STATIC,34,17,400,8
-    LTEXT           "Briganti suggested a cut-off value for probability of lymphnode metastases at 5,5% as an indication for lymphadenectomy,",IDC_STATIC,34,27,400,8
-    LTEXT           "corresponding to a total ""Briganti-score"" of 90 points, giving a negative predictive value of 98,6%.",IDC_STATIC,34,37,400,8
-        LTEXT           "This is also what is suggested in the EAU guidelines.",IDC_STATIC,34,47,400,8
-    DEFPUSHBUTTON   "OK",IDOK,150,65,50,14,WS_GROUP
+    LTEXT           "Lorem Ipsum",IDC_STATIC,34,7,400,8
+    DEFPUSHBUTTON   "OK",IDOK,220,75,50,14,WS_GROUP
+END
+
+//Reference dialog
+IDD_REFERENCEDIALOG DIALOGEX 0, 0, 520, 100
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Reference"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Reference for Briganti Nomogram:",IDC_STATIC,34,7,400,8
+    LTEXT           "Giorgio Gandaglia et al.",IDC_STATIC,34,17,400,8
+    LTEXT           """Identification of the Optimal Candidates for Nodal Staging with Extended Pelvic Lymph Node Dissection Among Prostate Cancer Patients",IDC_STATIC,34,27,600,8
+    LTEXT           "Who Underwent Preoperative Prostate-specific Membrane Antigen Positron Emission Tomography.",IDC_STATIC,34,37,600,8
+    LTEXT           "External Validation of the Memorial Sloan Kettering Cancer Center and Briganti Nomograms and Development of a Novel Tool""",IDC_STATIC,34,47,600,8
+    LTEXT           "EUROPEAN UROLOGY ONCOLOGY 6 (2023) 543-552.",IDC_STATIC,34,57,400,8
+    DEFPUSHBUTTON   "OK",IDOK,220,75,50,14,WS_GROUP
 END
 
 
 // Our accelerators.
 IDR_ACCELERATOR ACCELERATORS 
 BEGIN
-    "A",            ID_HELP_ABOUT,          VIRTKEY, ALT, NOINVERT
-    "I",            ID_HELP_INTERPRETATION,          VIRTKEY, ALT, NOINVERT
+    "A",            ID_HELP_ABOUT, VIRTKEY, ALT, NOINVERT
+    "I",            ID_HELP_INTERPRETATION, VIRTKEY, ALT, NOINVERT
+    "R",            ID_HELP_REFERENCE, VIRTKEY, ALT, NOINVERT
 END
