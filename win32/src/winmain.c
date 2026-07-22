@@ -165,7 +165,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   hWndIcon = CreateWindow(TEXT("STATIC"), NULL,
            WS_VISIBLE | WS_CHILD | SS_BITMAP,
            500, 20, 400, 400, hWnd, NULL, HINST_THISCOMPONENT, NULL);
-  HBITMAP hImage = LoadImage(NULL, MAKEINTRESOURCE(IDI_APPICON), IMAGE_BITMAP, 0, 0, LR_DEFAULTCOLOR);
+  HBITMAP hImage = LoadBitmap(GetModuleHandle(NULL), MAKEINTRESOURCE(IDB_CROSS));
   SendMessage(hWndIcon, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hImage);
 
   // Total points

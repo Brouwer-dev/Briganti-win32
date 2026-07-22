@@ -191,8 +191,12 @@ void UpdateResult(HWND hWndMain)
     }
 
     if (0 < totalpoints)
-        lni = 0.409613*log(totalpoints) - 1.510997;  // lni(x) = a*log(x) + b; lni(42) = 0.02; lni(282) = 0.8
-    // l(x) = a*log(x+b) + c, l(140)=0.15, l(180)=0.3, l(200)=0.4
+        lni = 0.00001295*totalpoints*totalpoints - 0.00072152*totalpoints + 0.01503659;  
+    // coefficients from Curvefit2
+    // Ref: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
+    // lni(x) = ax^2 + bx + c; lni(42) = 0.02; lni(282) = 0.8
+    // l(x) = a*x*x + b*x + c, l(140)=0.15, l(180)=0.3, l(200)=0.4
+    // a = 41/840000 and b = -121/21000 from solving 
 
     swprintf(A, 6, L"%.1f\0", totalpoints);
     SendMessage(hWndResult, (UINT) WM_SETTEXT, (WPARAM) FALSE, (LPARAM) A);
