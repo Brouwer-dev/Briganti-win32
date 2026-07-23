@@ -33,17 +33,17 @@ ydata = np.array([
 0.7,
 0.8])
 
-plt.plot(xdata, ydata, 'b-', label='data')
+plt.plot(xdata, ydata, 'b-', label='Nomogram')
 
 popt, pcov = curve_fit(func, xdata, ydata)
 popt
 plt.plot(xdata, func(xdata, *popt), 'r-',
-         label='fit: a=%1.8f, b=%1.8f, c=%1.8f' % tuple(popt))
+         label='fit 1: a=%1.8f, b=%1.8f, c=%1.8f' % tuple(popt))
 
 popt, pcov = curve_fit(func, xdata, ydata, bounds=(0, [.1, .1, .1]))
 popt
 plt.plot(xdata, func(xdata, *popt), 'g--',
-         label='fit: a=%1.8f, b=%1.8f, c=%1.8f' % tuple(popt))
+         label='fit 2: a=%1.8f, b=%1.8f, c=%1.8f' % tuple(popt))
 
 plt.xlabel('x')
 plt.ylabel('y')
