@@ -23,7 +23,7 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #include <windows.h>
 #include <stdio.h>
 #ifdef WIN32
-#define swprintf _snwprintf
+#define swprintf _snwprintf_s
 #endif
 
 

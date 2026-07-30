@@ -198,10 +198,10 @@ void UpdateResult(HWND hWndMain)
     // l(x) = a*x*x + b*x + c, l(140)=0.15, l(180)=0.3, l(200)=0.4
     // a = 41/840000 and b = -121/21000 from solving 
 
-    swprintf(A, 6, L"%.1f\0", totalpoints);
+    swprintf(A, 6, 7, L"%.1f\0", totalpoints);
     SendMessage(hWndResult, (UINT) WM_SETTEXT, (WPARAM) FALSE, (LPARAM) A);
 
-    swprintf(A, 7, L"%.3f\0", lni);
+    swprintf(A, 7, 7, L"%.3f\0", lni);
     SendMessage(hWndLni, (UINT) WM_SETTEXT, (WPARAM) FALSE, (LPARAM) A);
 /*
     SendMessage(hWndComboBGG, WM_KILLFOCUS, (WPARAM)0, (LPARAM)0);

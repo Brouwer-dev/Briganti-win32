@@ -80,7 +80,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   for (k = 0; k <= 1; ++k)
   {
       // Add string to combobox.
-      swprintf(A,3,L"%d\0",k);
+      swprintf(A, 3, 25, L"%d\0", k);
       SendMessage(hWndComboBGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
   }
       
@@ -97,11 +97,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 110, 200, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  swprintf(A,15,L"Organ Confined\0");
+  swprintf(A, 15, 25, L"Organ Confined\0");
   SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
-  swprintf(A,24,L"Extracapsular Extension\0");
+  swprintf(A, 24, 25, L"Extracapsular Extension\0");
   SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
-  swprintf(A,25,L"Seminal Vesicle Invasion\0");
+  swprintf(A, 25, 25, L"Seminal Vesicle Invasion\0");
   SendMessage(hWndComboCS,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
 
   SendMessage(hWndComboCS, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
@@ -118,7 +118,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
   for (k = 0; k <= 45; ++k)
   {
-	  swprintf(A, 3, L"%d\0", k);
+	  swprintf(A, 3, 25, L"%d\0", k);
       SendMessage(hWndComboMRI,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
@@ -136,7 +136,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
   for (k = 0; k <= 100; ++k)
   {
-	  swprintf(A, 4, L"%d\0", k);
+	  swprintf(A, 4, 25, L"%d\0", k);
       SendMessage(hWndComboPSA,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
   }
 
@@ -154,7 +154,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
   for (k = 0; k <= 100; ++k)
   {
-      swprintf(A, 4, L"%d\0", k);
+      swprintf(A, 4, 25, L"%d\0", k);
       SendMessage(hWndComboPPC,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
