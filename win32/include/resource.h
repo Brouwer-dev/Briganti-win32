@@ -8,6 +8,7 @@
 #define IDD_INTERPRETATIONDIALOG        105
 #define IDD_REFERENCEDIALOG             106
 #define IDB_CROSS                       107
+#define ID_RESETBUTTON                  108
 #define ID_HELP_ABOUT                   40001
 #define ID_FILE_EXIT                    40002
 #define ID_HELP_INTERPRETATION          40003

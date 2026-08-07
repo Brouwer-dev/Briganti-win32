@@ -32,5 +32,6 @@ Keyboard navigation
 -------------------
 Tab:        Move to next input field
 Shft+Tab:   Move to previous input field
+F4:         Open drop down list of input field
 Arrow down: Select next input value
 Arrow up:   Select previous input value

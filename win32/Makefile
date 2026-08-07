@@ -22,5 +22,5 @@ clean :
 obj/%.o : src/%.c ${HEADERS}
 	${CC} ${CFLAGS} ${INCLUDE_DIRS} -c $< -o $@
 
-obj/resource.o : res/resource.rc res/Application.manifest res/Application.ico include/resource.h
+obj/resource.o : res/resource.rc res/Application.manifest res/Application.ico res/kcmdrkonqi.bmp include/resource.h
 	${RC} -I./include -I./res -i $< -o $@

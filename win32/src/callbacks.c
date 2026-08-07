@@ -2,6 +2,16 @@
 #include "resource.h"
 #include <math.h>
 
+int Reset(HWND hWndMain)
+{
+	ComboBox_SetCurSel(hWndComboBGG, 0);
+	ComboBox_SetCurSel(hWndComboCS,  0);
+	ComboBox_SetCurSel(hWndComboMRI, 0);
+	ComboBox_SetCurSel(hWndComboPSA, 0);
+	ComboBox_SetCurSel(hWndComboPPC, 0);
+	UpdateResult(hWndMain);
+	return 0;
+}
 
 // Window procedure for our main window.
 LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -46,6 +56,12 @@ LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         {
           DialogBox(hInstance, MAKEINTRESOURCE(IDD_REFERENCEDIALOG), hWnd, &AboutDialogProc);
           return 0;
+        }
+
+        case ID_RESETBUTTON:
+        {
+        	Reset(hWnd);
+        	return 0;
         }
 
         case ID_FILE_EXIT:
@@ -167,11 +183,11 @@ void UpdateResult(HWND hWndMain)
     
     indexCS  = GetAndValidateIndex(hWndMain, hWndComboCS,   2, TEXT("CS out of range."));
     
-    indexMRI = GetAndValidateIndex(hWndMain, hWndComboMRI,  45, TEXT("MRI out of range."));
+    indexMRI = GetAndValidateIndex(hWndMain, hWndComboMRI, 23, TEXT("MRI out of range."));
     
-    indexPSA = GetAndValidateIndex(hWndMain, hWndComboPSA, 100, TEXT("PSA out of range."));
+    indexPSA = GetAndValidateIndex(hWndMain, hWndComboPSA, 50, TEXT("PSA out of range."));
     
-    indexPPC = GetAndValidateIndex(hWndMain, hWndComboPPC, 100, TEXT("PPC out of range."));
+    indexPPC = GetAndValidateIndex(hWndMain, hWndComboPPC, 10, TEXT("PPC out of range."));
 
     if (1 == indexBGG)
     	totalpoints += 40;
@@ -181,9 +197,9 @@ void UpdateResult(HWND hWndMain)
         case 1: totalpoints += 33; break;  // 32.5 + 2.5*(2/10) = 33
         case 2: totalpoints += 63; break;  // 62.5 + 2.5*(2/10) = 63
     }
-    totalpoints += 100*indexMRI/45;
-    totalpoints += 38.5*indexPSA/100;      // psa(100) = 37.5 + 2.5*(4/10) = 38.5
-    totalpoints += 73.0*indexPPC/100;      // ppc( 50) = 35.0 + 2.5*(6/10) = 36.5
+    totalpoints += 100*2*indexMRI/45;
+    totalpoints += 38.5*indexPSA/50;      // psa(100) = 37.5 + 2.5*(4/10) = 38.5
+    totalpoints += 73.0*indexPPC/10;      // ppc( 50) = 35.0 + 2.5*(6/10) = 36.5
 
     if (totalpoints < 0 || 300 < totalpoints)
     {

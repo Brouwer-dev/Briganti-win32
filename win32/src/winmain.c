@@ -5,7 +5,7 @@
 #include "resource.h"
 #include "callbacks.h"
 
-HWND hWndResult, hWndLni, hWndComboBGG, hWndComboCS, hWndComboMRI, hWndComboPSA, hWndComboPPC, hWndIcon;
+HWND hWndResult, hWndLni, hWndComboBGG, hWndComboCS, hWndComboMRI, hWndComboPSA, hWndComboPPC, hWndIcon, hWndButtonReset;
 
 /* Briganti Nomogram 3 - EUROPEAN UROLOGY ONCOLOGY 6 (2023) 543–552
  * BGG = Biopsy grade group 5
@@ -58,7 +58,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
   // Create instance of main window
   // ================================================================  
   hWnd = CreateWindowEx(0, MainWndClass, MainWndClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-                        700, 450, NULL, NULL, hInstance, NULL);
+                        700, 550, NULL, NULL, hInstance, NULL);
 
   // Error if window creation failed.
   if (! hWnd)
@@ -116,9 +116,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 180, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 0; k <= 45; ++k)
+  for (k = 0; k <= 23; ++k)
   {
-	  swprintf(A, 3, 25, L"%d\0", k);
+	  swprintf(A, 3, 25, L"%d\0", 2*k);
       SendMessage(hWndComboMRI,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
@@ -134,9 +134,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 250, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 0; k <= 100; ++k)
+  for (k = 0; k <= 50; ++k)
   {
-	  swprintf(A, 4, 25, L"%d\0", k);
+	  swprintf(A, 4, 25, L"%d\0", 2*k);
       SendMessage(hWndComboPSA,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
   }
 
@@ -152,9 +152,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 320, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 0; k <= 100; ++k)
+  for (k = 0; k <= 10; ++k)
   {
-      swprintf(A, 4, 25, L"%d\0", k);
+      swprintf(A, 4, 25, L"%d\0", 10*k);
       SendMessage(hWndComboPPC,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A); 
   }
 
@@ -189,6 +189,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	     WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER,
 	     500, 320, 75, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
   UpdateResult(hWnd);
+
+  // Reset button
+  // ================================================================
+  hWndButtonReset = CreateWindow(WC_BUTTON, TEXT("Reset"),
+           BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER,
+           300, 400, 75, 50, hWnd, (HMENU)ID_RESETBUTTON, HINST_THISCOMPONENT, NULL);
 
   // Load accelerators.
   hAccelerators = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDR_ACCELERATOR));
