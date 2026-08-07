@@ -2,8 +2,8 @@
 #include "resource.h"
 
 // Win32 application icon.
-IDI_APPICON             ICON                    "kcmdrkonqi.ico"
-IDB_CROSS               BITMAP  DISCARDABLE     "kcmdrkonqi.bmp"
+IDI_APPICON             ICON     "kcmdrkonqi.ico"
+IDB_CROSS               BITMAP   "kcmdrkonqi.bmp"
 
 // Our main menu.
 IDR_MAINMENU MENU 

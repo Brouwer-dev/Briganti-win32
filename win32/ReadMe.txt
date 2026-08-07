@@ -21,6 +21,7 @@ Antigen Positron Emission Tomography. External Validation of the
 Memorial Sloan Kettering Cancer Center and Briganti Nomograms
 and Development of a Novel Tool"
 EUROPEAN UROLOGY ONCOLOGY 6 (2023) 543–552
+https://doi.org/10.1016/j.euo.2023.05.003
 
 
 Installation
