@@ -77,12 +77,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
          CBS_DROPDOWNLIST | CBS_HASSTRINGS | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE | WS_TABSTOP,
          40, 40, 75, 350, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
-  for (k = 0; k <= 1; ++k)
-  {
-      // Add string to combobox.
-      swprintf(A, 3, 25, L"%d\0", k);
-      SendMessage(hWndComboBGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
-  }
+  // Add string to combobox.
+  swprintf(A, 3, 25, L"No\0");
+  SendMessage(hWndComboBGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
+  swprintf(A, 4, 25, L"Yes\0");
+  SendMessage(hWndComboBGG,(UINT) CB_ADDSTRING,(WPARAM) 0,(LPARAM) A);
       
   // Send the CB_SETCURSEL message to display an initial item in the selection field  
   SendMessage(hWndComboBGG, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
@@ -181,7 +180,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
   // Risk of LNI
   // ================================================================
-  hWndLabelLni = CreateWindow(TEXT("STATIC"), TEXT("Risk of LNI:"),
+  hWndLabelLni = CreateWindow(TEXT("STATIC"), TEXT("Risk of LNI [%]:"),
 	     WS_VISIBLE | WS_CHILD | SS_LEFT,
 	     500, 300, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
