@@ -180,7 +180,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
   // Risk of LNI
   // ================================================================
-  hWndLabelLni = CreateWindow(TEXT("STATIC"), TEXT("Risk of LNI [%]:"),
+  hWndLabelLni = CreateWindow(TEXT("STATIC"), TEXT("Risk of LNI (%):"),
 	     WS_VISIBLE | WS_CHILD | SS_LEFT,
 	     500, 300, 200, 20, hWnd, NULL, HINST_THISCOMPONENT, NULL);
 
