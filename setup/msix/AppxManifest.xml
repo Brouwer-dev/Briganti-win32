@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+  <Identity Name="AndersBisbjergMadsen.BrigantiNomogram"
+            ProcessorArchitecture="neutral"
+            Publisher="CN=B3D9EDDD-B7E0-4453-BA7E-F4EADB9B584F"
+            Version="1.0.0.0"
+  />
+
+  <Properties>
+    <DisplayName>Briganti Nomogram</DisplayName>
+    <Description>A simple Urology tool for calculating the risk of LNI (Lymph Node Invasion) based on five parameters</Description>
+    <Logo>box-art.png</Logo>
+    <PublisherDisplayName>No iDevice Software</PublisherDisplayName>
+  </Properties>
+
+  <Resources>
+    <Resource Language="en-gb"/>
+  </Resources>
+
+  <Dependencies>
+    <!--    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14316.0" MaxVersionTested="10.0.15063.0"/> -->
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.19041.0"/>
+  </Dependencies>
+
+  <Capabilities>
+<!--    <rescap:Capability Name="runFullTrust"/> -->
+  </Capabilities>
+
+  <Applications>
+    <Application Id="Briganti" Executable="Briganti.exe"
+		 uap10:RuntimeBehavior="packagedClassicApp"
+		 uap10:TrustLevel="appContainer">
+      <uap:VisualElements DisplayName="Briganti Nomogram"
+		      Square150x150Logo="icon.png"
+		      Square44x44Logo="small_icon.png"
+                      Description="A simple Urology tool for calculating the risk of LNI (Lymph Node Invasion) based on five parameters"
+                      BackgroundColor="transparent"
+      />
+    </Application>
+
+  </Applications>
+  
+</Package>
